@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sara Valle | Nutrición con Coherencia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --terracota: #9B6B4C;
+            --durazno: #D4A88B;
+            --eucalipto: #6B8E7F;
+            --crema: #F7F3EE;
+            --oscuro: #2F3C39;
+        }
+        
+        body {
+            font-family: 'Raleway', sans-serif;
+            color: var(--oscuro);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* NAVEGACIÓN */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: white;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            box-shadow: 0 4px 30px rgba(0,0,0,0.15);
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            text-decoration: none;
+        }
+        
+        .logo-apple {
+            width: 50px;
+            height: 50px;
+            flex-shrink: 0;
+        }
+        
+        .logo-apple svg {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .logo-text {
+            text-align: left;
+        }
+        
+        .logo-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8em;
+            font-weight: 600;
+            color: var(--terracota);
+            line-height: 1;
+            margin-bottom: 3px;
+        }
+        
+        .logo-tagline {
+            font-family: 'Raleway', sans-serif;
+            font-size: 0.75em;
+            color: var(--eucalipto);
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--oscuro);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 1.05em;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--terracota);
+        }
+        
+        .nav-cta {
+            background: var(--terracota);
+            color: white !important;
+            padding: 12px 28px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-cta:hover {
+            background: var(--oscuro);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(155, 107, 76, 0.3);
+        }
+        
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+        }
+        
+        .mobile-toggle span {
+            width: 30px;
+            height: 3px;
+            background: var(--terracota);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        /* HERO SECTION */
+        .hero {
+            margin-top: 90px;
+            min-height: 90vh;
+            background: linear-gradient(135deg, var(--crema) 0%, rgba(212, 168, 139, 0.15) 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(155, 107, 76, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-content h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4em;
+            font-weight: 700;
+            color: var(--terracota);
+            line-height: 1.2;
+            margin-bottom: 25px;
+        }
+        
+        .hero-highlight {
+            color: var(--eucalipto);
+            font-style: italic;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.4em;
+            color: var(--oscuro);
+            margin-bottom: 30px;
+            line-height: 1.7;
+        }
+        
+        .hero-description {
+            font-size: 1.15em;
+            color: #555;
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+        
+        .hero-ctas {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary {
+            background: var(--terracota);
+            color: white;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+        
+        .btn-primary:hover {
+            background: var(--oscuro);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(155, 107, 76, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--terracota);
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+            border: 2px solid var(--terracota);
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--terracota);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .hero-image {
+            position: relative;
+        }
+        
+        .hero-image-placeholder {
+            width: 100%;
+            height: 600px;
+            background: linear-gradient(135deg, var(--durazno) 0%, var(--eucalipto) 100%);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3em;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+        
+        /* SECCIONES GENERALES */
+        section {
+            padding: 100px 40px;
+        }
+        
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-label {
+            color: var(--eucalipto);
+            font-size: 1em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+        
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5em;
+            font-weight: 700;
+            color: var(--terracota);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .section-subtitle {
+            font-size: 1.3em;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+        
+        /* MI HISTORIA */
+        #mi-historia {
+            background: var(--crema);
+        }
+        
+        .historia-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .historia-image {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(135deg, var(--eucalipto) 0%, var(--durazno) 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5em;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+        
+        .historia-text h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2em;
+            color: var(--terracota);
+            margin-bottom: 25px;
+        }
+        
+        .historia-text p {
+            font-size: 1.15em;
+            color: #555;
+            line-height: 1.9;
+            margin-bottom: 20px;
+        }
+        
+        .historia-highlight {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid var(--terracota);
+            margin-top: 30px;
+        }
+        
+        .historia-highlight p {
+            font-style: italic;
+            color: var(--oscuro);
+            font-size: 1.2em;
+        }
+        
+        /* SERVICIOS */
+        #servicios {
+            background: white;
+        }
+        
+        .servicios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+        
+        .servicio-card {
+            background: var(--crema);
+            padding: 45px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            border-top: 5px solid var(--terracota);
+        }
+        
+        .servicio-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+        
+        .servicio-icon {
+            font-size: 3.5em;
+            margin-bottom: 25px;
+        }
+        
+        .servicio-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2em;
+            color: var(--terracota);
+            margin-bottom: 15px;
+        }
+        
+        .servicio-card .precio {
+            font-size: 1.1em;
+            color: var(--eucalipto);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .servicio-card p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+        
+        .servicio-features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .servicio-features li {
+            color: #555;
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .servicio-features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--eucalipto);
+            font-weight: bold;
+            font-size: 1.3em;
+        }
+        
+        /* BLOG */
+        #blog {
+            background: var(--crema);
+        }
+        
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+        
+        .blog-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .blog-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, var(--durazno) 0%, var(--eucalipto) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            color: white;
+        }
+        
+        .blog-content {
+            padding: 35px;
+        }
+        
+        .blog-category {
+            color: var(--eucalipto);
+            font-size: 0.9em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+        
+        .blog-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8em;
+            color: var(--oscuro);
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+        
+        .blog-card p {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        
+        .blog-link {
+            color: var(--terracota);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .blog-link:hover {
+            color: var(--oscuro);
+        }
+        
+        /* RECURSO GRATUITO */
+        #recurso {
+            background: linear-gradient(135deg, var(--terracota) 0%, var(--eucalipto) 100%);
+            color: white;
+        }
+        
+        .recurso-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .recurso-container .section-title {
+            color: white;
+        }
+        
+        .recurso-container .section-subtitle {
+            color: rgba(255,255,255,0.95);
+        }
+        
+        .recurso-box {
+            background: white;
+            padding: 50px;
+            border-radius: 25px;
+            margin-top: 50px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+        
+        .recurso-box h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5em;
+            color: var(--terracota);
+            margin-bottom: 20px;
+        }
+        
+        .recurso-description {
+            font-size: 1.15em;
+            color: #555;
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+        
+        .recurso-benefits {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .recurso-benefits li {
+            color: #555;
+            padding-left: 35px;
+            position: relative;
+            line-height: 1.6;
+        }
+        
+        .recurso-benefits li::before {
+            content: "🍎";
+            position: absolute;
+            left: 0;
+            font-size: 1.3em;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            color: var(--oscuro);
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 1.05em;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1.05em;
+            font-family: 'Raleway', sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--terracota);
+            box-shadow: 0 0 0 3px rgba(155, 107, 76, 0.1);
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+        
+        /* CONTACTO */
+        #contacto {
+            background: white;
+        }
+        
+        .contacto-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+        
+        .contacto-info h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5em;
+            color: var(--terracota);
+            margin-bottom: 25px;
+        }
+        
+        .contacto-info p {
+            font-size: 1.15em;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+        
+        .contacto-methods {
+            list-style: none;
+        }
+        
+        .contacto-methods li {
+            padding: 20px 0;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 1.1em;
+            color: #555;
+        }
+        
+        .contacto-methods li:last-child {
+            border-bottom: none;
+        }
+        
+        .contacto-methods strong {
+            color: var(--terracota);
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .contacto-form {
+            background: var(--crema);
+            padding: 45px;
+            border-radius: 20px;
+        }
+        
+        /* FOOTER */
+        footer {
+            background: var(--oscuro);
+            color: white;
+            padding: 60px 40px 30px;
+        }
+        
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo .logo-apple {
+            width: 40px;
+            height: 40px;
+        }
+        
+        .footer-logo .logo-name {
+            font-size: 1.5em;
+            color: white;
+        }
+        
+        .footer-logo .logo-tagline {
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .footer-about p {
+            color: rgba(255,255,255,0.8);
+            line-height: 1.8;
+        }
+        
+        .footer-section h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: var(--durazno);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 968px) {
+            .nav-menu {
+                position: fixed;
+                top: 90px;
+                right: -100%;
+                width: 300px;
+                height: calc(100vh - 90px);
+                background: white;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 40px;
+                box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+                transition: right 0.3s ease;
+                gap: 25px;
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .mobile-toggle {
+                display: flex;
+            }
+            
+            .hero-container,
+            .historia-content,
+            .contacto-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.8em;
+            }
+            
+            .section-title {
+                font-size: 2.5em;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .form-grid,
+            .recurso-benefits {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .nav-container {
+                padding: 15px 20px;
+            }
+            
+            .logo-name {
+                font-size: 1.4em;
+            }
+            
+            section {
+                padding: 60px 20px;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.2em;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2em;
+            }
+            
+            .btn-primary,
+            .btn-secondary {
+                padding: 15px 30px;
+                font-size: 1em;
+            }
+            
+            .servicios-grid,
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* ANIMACIONES */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        /* UTILIDADES */
+        .text-center {
+            text-align: center;
+        }
+        
+        .mt-40 {
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVEGACIÓN -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#inicio" class="logo-container">
+                <div class="logo-apple">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 50 8 Q 56 12 54 20" fill="none" stroke="#6B8E7F" stroke-width="3" stroke-linecap="round"/>
+                        <ellipse cx="54" cy="16" rx="5" ry="8" fill="#6B8E7F" transform="rotate(-25 54 16)"/>
+                        <path d="M 50 22 C 33 23 22 35 22 52 C 22 68 28 80 40 88 C 45 91 50 93 50 93 C 50 93 55 91 60 88 C 72 80 78 68 78 52 C 78 35 67 22 50 22 Z" fill="#9B6B4C"/>
+                        <circle cx="72" cy="48" r="12" fill="#F7F3EE"/>
+                        <path d="M 72 40 Q 74 44 73 48 Q 74 52 72 56" fill="none" stroke="#9B6B4C" stroke-width="1"/>
+                        <ellipse cx="38" cy="42" rx="10" ry="15" fill="#D4A88B" opacity="0.3"/>
+                        <circle cx="35" cy="60" r="3" fill="#2F3C39" opacity="0.15"/>
+                        <circle cx="52" cy="68" r="2" fill="#2F3C39" opacity="0.15"/>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <div class="logo-name">Sara Valle</div>
+                    <div class="logo-tagline">Cómete la **** manzana</div>
+                </div>
+            </a>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#mi-historia">Mi Historia</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#recurso">Recurso Gratis</a></li>
+                <li><a href="#contacto" class="nav-cta">Contacto</a></li>
+            </ul>
+            
+            <div class="mobile-toggle" id="mobileToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- HERO -->
+    <section class="hero" id="inicio">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>
+                    Tú también mereces estar en <span class="hero-highlight">tu lista de prioridades</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Para mujeres que cuidan de todos... menos de ellas mismas
+                </p>
+                <p class="hero-description">
+                    Si llevas años intentando "arreglarte", si tu salud es tu última prioridad, y si la carga mental te está destruyendo la digestión y la energía... este espacio es para ti.
+                </p>
+                <div class="hero-ctas">
+                    <a href="#recurso" class="btn-primary">Descarga tu Guía Gratis</a>
+                    <a href="#servicios" class="btn-secondary">Conoce mis Servicios</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-image-placeholder">
+                    🍎
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- MI HISTORIA -->
+    <section id="mi-historia">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-label">Sobre Mí</div>
+                <h2 class="section-title">Mi Historia</h2>
+            </div>
+            
+            <div class="historia-content">
+                <div class="historia-image">
+                    <img src="perfil.jpg" alt="Retrato de Nutricionista Valle" class="historia-image">
+                </div>
+                <div class="historia-text">
+                    <h3>Hola, soy Sara</h3>
+                    <p>
+                        Soy nutricionista integrativa especializada en mujeres con exceso de carga mental, estrés crónico y una relación complicada con su cuerpo y la comida.
+                    </p>
+                    <p>
+                        Entiendo lo que es vivir corriendo entre mil responsabilidades, ser la gestora mental de todo, y sentir que TÚ eres siempre la última en la lista. Porque lo he vivido. Porque lo veo cada día en las mujeres increíbles que llegan a mi consulta.
+                    </p>
+                    <p>
+                        Por eso mi enfoque no es darte otro menú perfecto que no vas a seguir. Es ayudarte a entender QUÉ le pasa a tu cuerpo, por qué reacciona así, y cómo recuperar tu energía y digestión sin añadir más carga a tu vida.
+                    </p>
+                    
+                    <div class="historia-highlight">
+                        <p>
+                            "No estás rota. Tu cuerpo está pidiendo a gritos que lo escuches. Y yo estoy aquí para enseñarte a hacerlo con coherencia, no con perfección."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- SERVICIOS -->
+    <section id="servicios">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-label">Cómo Puedo Ayudarte</div>
+                <h2 class="section-title">Mis Servicios</h2>
+                <p class="section-subtitle">
+                    Diseñados para mujeres con vidas reales, no ideales
+                </p>
+            </div>
+            
+            <div class="servicios-grid">
+                <div class="servicio-card">
+                    <div class="servicio-icon">🌱</div>
+                    <h3>Consulta Descubrimiento</h3>
+                    <div class="precio">60€ / 90 minutos</div>
+                    <p>Ideal para conocer mi método y recibir orientación inicial sobre tu situación específica.</p>
+                    <ul class="servicio-features">
+                        <li>Análisis completo de tu situación</li>
+                        <li>Evaluación de estrés y digestión</li>
+                        <li>Plan nutricional inicial</li>
+                        <li>Primeros pasos concretos</li>
+                    </ul>
+                    <a href="#contacto" class="btn-primary">Agendar Consulta</a>
+                </div>
+                
+                <div class="servicio-card">
+                    <div class="servicio-icon">🌿</div>
+                    <h3>Paquete Equilibrio</h3>
+                    <div class="precio">150€ / 1 mes</div>
+                    <p>1 consulta inicial + 2 seguimientos. Para empezar a generar cambios sostenibles.</p>
+                    <ul class="servicio-features">
+                        <li>Consulta inicial completa (90 min)</li>
+                        <li>2 seguimientos (45 min cada uno)</li>
+                        <li>Plan nutricional personalizado</li>
+                        <li>Ajustes según tu evolución</li>
+                        <li>Soporte por email</li>
+                    </ul>
+                    <a href="#contacto" class="btn-primary">Empezar Ahora</a>
+                </div>
+                
+                <div class="servicio-card">
+                    <div class="servicio-icon">🌳</div>
+                    <h3>Programa Transformación</h3>
+                    <div class="precio">390€ / 3 meses</div>
+                    <p>Transformación completa con acompañamiento constante. Para resultados profundos y duraderos.</p>
+                    <ul class="servicio-features">
+                        <li>Consulta inicial detallada (90 min)</li>
+                        <li>6 seguimientos personalizados</li>
+                        <li>Soporte por WhatsApp</li>
+                        <li>Material educativo exclusivo</li>
+                        <li>Ajustes continuos del plan</li>
+                        <li>Acompañamiento integral</li>
+                    </ul>
+                    <a href="#contacto" class="btn-primary">Quiero Transformarme</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- BLOG -->
+    <section id="blog">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-label">Recursos</div>
+                <h2 class="section-title">Últimas del Blog</h2>
+                <p class="section-subtitle">
+                    Contenido para ayudarte a entender tu cuerpo y recuperar tu energía
+                </p>
+            </div>
+            
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <div class="blog-image">📝</div>
+                    <div class="blog-content">
+                        <div class="blog-category">Estrés & Digestión</div>
+                        <h3>Por qué comes perfecto todo el día y arrasas la cocina a las 10pm</h3>
+                        <p>El ciclo de restricción diurna, cortisol elevado y antojos nocturnos explicado. No es falta de voluntad, es fisiología.</p>
+                        <a href="#" class="blog-link">Leer más →</a>
+                    </div>
+                </div>
+                
+                <div class="blog-card">
+                    <div class="blog-image">💚</div>
+                    <div class="blog-content">
+                        <div class="blog-category">Carga Mental</div>
+                        <h3>5 señales de que tu carga mental está destruyendo tu digestión</h3>
+                        <p>Hinchazón, estreñimiento, comer en piloto automático... Cómo la gestión mental afecta tu sistema digestivo.</p>
+                        <a href="#" class="blog-link">Leer más →</a>
+                    </div>
+                </div>
+                
+                <div class="blog-card">
+                    <div class="blog-image">🌟</div>
+                    <div class="blog-content">
+                        <div class="blog-category">Mindset</div>
+                        <h3>Carta a la mujer que siente culpa por tomarse 30 minutos para ella</h3>
+                        <p>Por qué el autocuidado no es egoísmo y cómo empezar a priorizarte sin sentirte mal.</p>
+                        <a href="#" class="blog-link">Leer más →</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-40">
+                <a href="#" class="btn-secondary">Ver Todos los Artículos</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- RECURSO GRATUITO -->
+    <section id="recurso">
+        <div class="recurso-container">
+            <div class="section-header">
+                <div class="section-label" style="color: rgba(255,255,255,0.9);">Recurso Gratuito</div>
+                <h2 class="section-title">Descarga tu Guía Gratis</h2>
+                <p class="section-subtitle">
+                    "Date Permiso para Priorizarte: 7 Días para Recuperar Tu Energía sin Culpa"
+                </p>
+            </div>
+            
+            <div class="recurso-box">
+                <h3>🍎 Tu Guía de 7 Días te Incluye:</h3>
+                <p class="recurso-description">
+                    Un plan práctico y realista para empezar a cuidarte sin añadir más carga mental a tu vida
+                </p>
+                
+                <ul class="recurso-benefits">
+                    <li>1 micro-hábito diario (5-10 min máximo)</li>
+                    <li>Recetas de emergencia para días caóticos</li>
+                    <li>Ejercicio de reconexión con tu cuerpo</li>
+                    <li>Affirmaciones anti-culpa</li>
+                    <li>Tracker de energía y digestión</li>
+                    <li>Guía de primeros pasos sostenibles</li>
+                </ul>
+                
+                <script src="https://f.convertkit.com/ckjs/ck.5.js"></script>
+      <form action="https://app.kit.com/forms/9063768/subscriptions" class="seva-form formkit-form" method="post" data-sv-form="9063768" data-uid="04b3f28036" data-format="inline" data-version="5" data-options="{&quot;settings&quot;:{&quot;after_subscribe&quot;:{&quot;action&quot;:&quot;message&quot;,&quot;success_message&quot;:&quot;Success! Now check your email to confirm your subscription.&quot;,&quot;redirect_url&quot;:&quot;&quot;},&quot;analytics&quot;:{&quot;google&quot;:null,&quot;fathom&quot;:null,&quot;facebook&quot;:null,&quot;segment&quot;:null,&quot;pinterest&quot;:null,&quot;sparkloop&quot;:null,&quot;googletagmanager&quot;:null},&quot;modal&quot;:{&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15},&quot;powered_by&quot;:{&quot;show&quot;:true,&quot;url&quot;:&quot;https://kit.com/features/forms?utm_campaign=poweredby&amp;utm_content=form&amp;utm_medium=referral&amp;utm_source=dynamic&quot;},&quot;recaptcha&quot;:{&quot;enabled&quot;:false},&quot;return_visitor&quot;:{&quot;action&quot;:&quot;show&quot;,&quot;custom_content&quot;:&quot;&quot;},&quot;slide_in&quot;:{&quot;display_in&quot;:&quot;bottom_right&quot;,&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15},&quot;sticky_bar&quot;:{&quot;display_in&quot;:&quot;top&quot;,&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15}},&quot;version&quot;:&quot;5&quot;}" min-width="400 500 600 700 800" style="background-color: rgb(255, 255, 255); border-radius: 6px;"><div data-style="full"><div data-element="column" class="formkit-column" style="background-color: rgb(247, 243, 238);"><div class="formkit-background" style="opacity: 0.3;"></div><div class="formkit-header" data-element="header" style="color: rgb(155, 107, 76); font-size: 20px; font-weight: 700;"><h2>Descarga tu guía gratis: 7 días para priorizarte</h2></div><div class="formkit-subheader" data-element="subheader" style="color: rgb(104, 104, 104); font-size: 15px;"><p>sara valle nutricion</p></div></div><div data-element="column" class="formkit-column"><ul class="formkit-alert formkit-alert-error" data-element="errors" data-group="alert"></ul><div data-element="fields" class="seva-fields formkit-fields"><div class="formkit-field"><input class="formkit-input" name="email_address" aria-label="Email Address" placeholder="Email Address" required="" type="email" style="color: rgb(0, 0, 0); border-color: rgb(227, 227, 227); border-radius: 4px; font-weight: 400;"></div><div class="formkit-field"><input class="formkit-input" aria-label="First Name" name="fields[first_name]" placeholder="First Name" type="text" style="color: rgb(0, 0, 0); border-color: rgb(227, 227, 227); border-radius: 4px; font-weight: 400;"></div><button data-element="submit" class="formkit-submit formkit-submit" style="color: rgb(247, 243, 238); background-color: rgb(155, 107, 76); border-radius: 24px; font-weight: 700;"><div class="formkit-spinner"><div></div><div></div><div></div></div><span class="">Descarga mi guía</span></button></div><div class="formkit-guarantee" data-element="guarantee" style="color: rgb(77, 77, 77); font-size: 13px; font-weight: 400;">We respect your privacy. Unsubscribe at any time.</div><div class="formkit-powered-by-convertkit-container"><a href="https://kit.com/features/forms?utm_campaign=poweredby&amp;utm_content=form&amp;utm_medium=referral&amp;utm_source=dynamic" data-element="powered-by" class="formkit-powered-by-convertkit" data-variant="dark" target="_blank" rel="nofollow">Built with Kit</a></div></div></div><style>.formkit-form[data-uid="04b3f28036"] *{box-sizing:border-box;}.formkit-form[data-uid="04b3f28036"]{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}.formkit-form[data-uid="04b3f28036"] legend{border:none;font-size:inherit;margin-bottom:10px;padding:0;position:relative;display:table;}.formkit-form[data-uid="04b3f28036"] fieldset{border:0;padding:0.01em 0 0 0;margin:0;min-width:0;}.formkit-form[data-uid="04b3f28036"] body:not(:-moz-handler-blocked) fieldset{display:table-cell;}.formkit-form[data-uid="04b3f28036"] h1,.formkit-form[data-uid="04b3f28036"] h2,.formkit-form[data-uid="04b3f28036"] h3,.formkit-form[data-uid="04b3f28036"] h4,.formkit-form[data-uid="04b3f28036"] h5,.formkit-form[data-uid="04b3f28036"] h6{color:inherit;font-size:inherit;font-weight:inherit;}.formkit-form[data-uid="04b3f28036"] h2{font-size:1.5em;margin:1em 0;}.formkit-form[data-uid="04b3f28036"] h3{font-size:1.17em;margin:1em 0;}.formkit-form[data-uid="04b3f28036"] p{color:inherit;font-size:inherit;font-weight:inherit;}.formkit-form[data-uid="04b3f28036"] ol:not([template-default]),.formkit-form[data-uid="04b3f28036"] ul:not([template-default]),.formkit-form[data-uid="04b3f28036"] blockquote:not([template-default]){text-align:left;}.formkit-form[data-uid="04b3f28036"] p:not([template-default]),.formkit-form[data-uid="04b3f28036"] hr:not([template-default]),.formkit-form[data-uid="04b3f28036"] blockquote:not([template-default]),.formkit-form[data-uid="04b3f28036"] ol:not([template-default]),.formkit-form[data-uid="04b3f28036"] ul:not([template-default]){color:inherit;font-style:initial;}.formkit-form[data-uid="04b3f28036"] .ordered-list,.formkit-form[data-uid="04b3f28036"] .unordered-list{list-style-position:outside !important;padding-left:1em;}.formkit-form[data-uid="04b3f28036"] .list-item{padding-left:0;}.formkit-form[data-uid="04b3f28036"][data-format="modal"]{display:none;}.formkit-form[data-uid="04b3f28036"][data-format="slide in"]{display:none;}.formkit-form[data-uid="04b3f28036"][data-format="sticky bar"]{display:none;}.formkit-sticky-bar .formkit-form[data-uid="04b3f28036"][data-format="sticky bar"]{display:block;}.formkit-form[data-uid="04b3f28036"] .formkit-input,.formkit-form[data-uid="04b3f28036"] .formkit-select,.formkit-form[data-uid="04b3f28036"] .formkit-checkboxes{width:100%;}.formkit-form[data-uid="04b3f28036"] .formkit-button,.formkit-form[data-uid="04b3f28036"] .formkit-submit{border:0;border-radius:5px;color:#ffffff;cursor:pointer;display:inline-block;text-align:center;font-size:15px;font-weight:500;cursor:pointer;margin-bottom:15px;overflow:hidden;padding:0;position:relative;vertical-align:middle;}.formkit-form[data-uid="04b3f28036"] .formkit-button:hover,.formkit-form[data-uid="04b3f28036"] .formkit-submit:hover,.formkit-form[data-uid="04b3f28036"] .formkit-button:focus,.formkit-form[data-uid="04b3f28036"] .formkit-submit:focus{outline:none;}.formkit-form[data-uid="04b3f28036"] .formkit-button:hover > span,.formkit-form[data-uid="04b3f28036"] .formkit-submit:hover > span,.formkit-form[data-uid="04b3f28036"] .formkit-button:focus > span,.formkit-form[data-uid="04b3f28036"] .formkit-submit:focus > span{background-color:rgba(0,0,0,0.1);}.formkit-form[data-uid="04b3f28036"] .formkit-button > span,.formkit-form[data-uid="04b3f28036"] .formkit-submit > span{display:block;-webkit-transition:all 300ms ease-in-out;transition:all 300ms ease-in-out;padding:12px 24px;}.formkit-form[data-uid="04b3f28036"] .formkit-input{background:#ffffff;font-size:15px;padding:12px;border:1px solid #e3e3e3;-webkit-flex:1 0 auto;-ms-flex:1 0 auto;flex:1 0 auto;line-height:1.4;margin:0;-webkit-transition:border-color ease-out 300ms;transition:border-color ease-out 300ms;}.formkit-form[data-uid="04b3f28036"] .formkit-input:focus{outline:none;border-color:#1677be;-webkit-transition:border-color ease 300ms;transition:border-color ease 300ms;}.formkit-form[data-uid="04b3f28036"] .formkit-input::-webkit-input-placeholder{color:inherit;opacity:0.8;}.formkit-form[data-uid="04b3f28036"] .formkit-input::-moz-placeholder{color:inherit;opacity:0.8;}.formkit-form[data-uid="04b3f28036"] .formkit-input:-ms-input-placeholder{color:inherit;opacity:0.8;}.formkit-form[data-uid="04b3f28036"] .formkit-input::placeholder{color:inherit;opacity:0.8;}.formkit-form[data-uid="04b3f28036"] [data-group="dropdown"]{position:relative;display:inline-block;width:100%;}.formkit-form[data-uid="04b3f28036"] [data-group="dropdown"]::before{content:"";top:calc(50% - 2.5px);right:10px;position:absolute;pointer-events:none;border-color:#4f4f4f transparent transparent transparent;border-style:solid;border-width:6px 6px 0 6px;height:0;width:0;z-index:999;}.formkit-form[data-uid="04b3f28036"] [data-group="dropdown"] select{height:auto;width:100%;cursor:pointer;color:#333333;line-height:1.4;margin-bottom:0;padding:0 6px;-webkit-appearance:none;-moz-appearance:none;appearance:none;font-size:15px;padding:12px;padding-right:25px;border:1px solid #e3e3e3;background:#ffffff;}.formkit-form[data-uid="04b3f28036"] [data-group="dropdown"] select:focus{outline:none;}.formkit-form[data-uid="04b3f28036"] [data-group="checkboxes"]{text-align:left;margin:0;}.formkit-form[data-uid="04b3f28036"] [data-group="checkboxes"] [data-group="checkbox"]{margin-bottom:10px;}.formkit-form[data-uid="04b3f28036"] [data-group="checkboxes"] [data-group="checkbox"] *{cursor:pointer;}.formkit-form[data-uid="04b3f28036"] [data-group="checkboxes"] [data-group="checkbox"]:last-of-type{margin-bottom:0;}.formkit-form[data-uid="04b3f28036"] [data-group="checkboxes"] [data-group="checkbox"] input[type="checkbox"]{display:none;}.formkit-form[data-uid="04b3f28036"] [data-group="checkboxes"] [data-group="checkbox"] input[type="checkbox"] + label::after{content:none;}.formkit-form[data-uid="04b3f28036"] [data-group="checkboxes"] [data-group="checkbox"] input[type="checkbox"]:checked + label::after{border-color:#ffffff;content:"";}.formkit-form[data-uid="04b3f28036"] [data-group="checkboxes"] [data-group="checkbox"] input[type="checkbox"]:checked + label::before{background:#10bf7a;border-color:#10bf7a;}.formkit-form[data-uid="04b3f28036"] [data-group="checkboxes"] [data-group="checkbox"] label{position:relative;display:inline-block;padding-left:28px;}.formkit-form[data-uid="04b3f28036"] [data-group="checkboxes"] [data-group="checkbox"] label::before,.formkit-form[data-uid="04b3f28036"] [data-group="checkboxes"] [data-group="checkbox"] label::after{position:absolute;content:"";display:inline-block;}.formkit-form[data-uid="04b3f28036"] [data-group="checkboxes"] [data-group="checkbox"] label::before{height:16px;width:16px;border:1px solid #e3e3e3;background:#ffffff;left:0px;top:3px;}.formkit-form[data-uid="04b3f28036"] [data-group="checkboxes"] [data-group="checkbox"] label::after{height:4px;width:8px;border-left:2px solid #4d4d4d;border-bottom:2px solid #4d4d4d;-webkit-transform:rotate(-45deg);-ms-transform:rotate(-45deg);transform:rotate(-45deg);left:4px;top:8px;}.formkit-form[data-uid="04b3f28036"] .formkit-alert{background:#f9fafb;border:1px solid #e3e3e3;border-radius:5px;-webkit-flex:1 0 auto;-ms-flex:1 0 auto;flex:1 0 auto;list-style:none;margin:25px auto;padding:12px;text-align:center;width:100%;}.formkit-form[data-uid="04b3f28036"] .formkit-alert:empty{display:none;}.formkit-form[data-uid="04b3f28036"] .formkit-alert-success{background:#d3fbeb;border-color:#10bf7a;color:#0c905c;}.formkit-form[data-uid="04b3f28036"] .formkit-alert-error{background:#fde8e2;border-color:#f2643b;color:#ea4110;}.formkit-form[data-uid="04b3f28036"] .formkit-spinner{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;height:0px;width:0px;margin:0 auto;position:absolute;top:0;left:0;right:0;width:0px;overflow:hidden;text-align:center;-webkit-transition:all 300ms ease-in-out;transition:all 300ms ease-in-out;}.formkit-form[data-uid="04b3f28036"] .formkit-spinner > div{margin:auto;width:12px;height:12px;background-color:#fff;opacity:0.3;border-radius:100%;display:inline-block;-webkit-animation:formkit-bouncedelay-formkit-form-data-uid-04b3f28036- 1.4s infinite ease-in-out both;animation:formkit-bouncedelay-formkit-form-data-uid-04b3f28036- 1.4s infinite ease-in-out both;}.formkit-form[data-uid="04b3f28036"] .formkit-spinner > div:nth-child(1){-webkit-animation-delay:-0.32s;animation-delay:-0.32s;}.formkit-form[data-uid="04b3f28036"] .formkit-spinner > div:nth-child(2){-webkit-animation-delay:-0.16s;animation-delay:-0.16s;}.formkit-form[data-uid="04b3f28036"] .formkit-submit[data-active] .formkit-spinner{opacity:1;height:100%;width:50px;}.formkit-form[data-uid="04b3f28036"] .formkit-submit[data-active] .formkit-spinner ~ span{opacity:0;}.formkit-form[data-uid="04b3f28036"] .formkit-powered-by[data-active="false"]{opacity:0.35;}.formkit-form[data-uid="04b3f28036"] .formkit-powered-by-convertkit-container{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;width:100%;margin:10px 0;position:relative;}.formkit-form[data-uid="04b3f28036"] .formkit-powered-by-convertkit-container[data-active="false"]{opacity:0.35;}.formkit-form[data-uid="04b3f28036"] .formkit-powered-by-convertkit{-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;background-color:#ffffff;border-radius:9px;color:#3d3d3d;cursor:pointer;display:block;height:36px;margin:0 auto;opacity:0.95;padding:0;-webkit-text-decoration:none;text-decoration:none;text-indent:100%;-webkit-transition:ease-in-out all 200ms;transition:ease-in-out all 200ms;white-space:nowrap;overflow:hidden;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;width:157px;background-repeat:no-repeat;background-position:center;background-image:url("data:image/svg+xml;charset=utf8,%3Csvg width='133' height='36' viewBox='0 0 133 36' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0.861 25.5C0.735 25.5 0.651 25.416 0.651 25.29V10.548C0.651 10.422 0.735 10.338 0.861 10.338H6.279C9.072 10.338 10.668 11.451 10.668 13.824C10.668 15.819 9.219 16.932 8.001 17.226C7.707 17.268 7.707 17.625 8.022 17.688C9.912 18.108 11.088 19.116 11.088 21.321C11.088 23.715 9.429 25.5 6.426 25.5H0.861ZM5.397 23.085C6.825 23.085 7.518 22.224 7.518 21.006C7.518 19.683 6.825 18.948 5.397 18.948H4.2V23.085H5.397ZM5.313 16.617C6.51 16.617 7.245 15.945 7.245 14.601C7.245 13.383 6.51 12.753 5.25 12.753H4.2V16.617H5.313ZM17.9758 23.883C17.9758 23.568 17.6608 23.505 17.5348 23.799C17.0308 24.954 16.1698 25.731 14.5528 25.731C12.8728 25.731 12.0958 24.471 12.0958 22.707V14.937C12.0958 14.811 12.1798 14.727 12.3058 14.727H15.2248C15.3508 14.727 15.4348 14.811 15.4348 14.937V21.657C15.4348 22.581 15.7708 23.022 16.4638 23.022C17.1778 23.022 17.6188 22.581 17.6188 21.657V14.937C17.6188 14.811 17.7028 14.727 17.8288 14.727H20.7478C20.8738 14.727 20.9578 14.811 20.9578 14.937V25.29C20.9578 25.416 20.8738 25.5 20.7478 25.5H18.1858C18.0598 25.5 17.9758 25.416 17.9758 25.29V23.883ZM25.6141 25.29C25.6141 25.416 25.5301 25.5 25.4041 25.5H22.4851C22.3591 25.5 22.2751 25.416 22.2751 25.29V14.937C22.2751 14.811 22.3591 14.727 22.4851 14.727H25.4041C25.5301 14.727 25.6141 14.811 25.6141 14.937V25.29ZM23.9131 13.74C22.8001 13.74 22.0441 12.942 22.0441 11.934C22.0441 10.926 22.8001 10.107 23.9131 10.107C25.0051 10.107 25.7611 10.926 25.7611 11.934C25.7611 12.942 25.0051 13.74 23.9131 13.74ZM26.7883 10.548C26.7883 10.422 26.8723 10.338 26.9983 10.338H29.9173C30.0433 10.338 30.1273 10.422 30.1273 10.548V22.056C30.1273 22.749 30.2533 23.085 30.8203 23.085C31.0093 23.085 31.1983 23.043 31.3663 23.001C31.5133 22.959 31.6183 22.959 31.6183 23.127V25.059C31.6183 25.164 31.5763 25.269 31.4923 25.311C30.9673 25.521 30.2953 25.71 29.5813 25.71C27.7123 25.71 26.7883 24.639 26.7883 22.476V10.548ZM32.4237 14.727C32.8227 14.727 32.9277 14.538 32.9697 14.055L33.1167 12.039C33.1167 11.913 33.2217 11.829 33.3477 11.829H35.8887C36.0147 11.829 36.0987 11.913 36.0987 12.039V14.517C36.0987 14.643 36.1827 14.727 36.3087 14.727H38.2827C38.4087 14.727 38.4927 14.811 38.4927 14.937V16.659C38.4927 16.785 38.4087 16.869 38.2827 16.869H36.0777V22.056C36.0777 22.875 36.5397 23.085 37.0647 23.085C37.4847 23.085 37.9467 22.938 38.3247 22.707C38.4717 22.623 38.5767 22.665 38.5767 22.833V24.828C38.5767 24.933 38.5347 25.017 38.4507 25.08C37.8417 25.458 36.9807 25.71 36.0357 25.71C34.2927 25.71 32.7387 24.912 32.7387 22.476V16.869H31.8567C31.7307 16.869 31.6467 16.785 31.6467 16.659V14.937C31.6467 14.811 31.7307 14.727 31.8567 14.727H32.4237ZM51.3808 14.727C51.5068 14.727 51.5908 14.79 51.6118 14.916L52.3888 19.851L52.5778 21.174C52.6198 21.468 52.9558 21.468 52.9768 21.174C53.0398 20.712 53.0818 20.271 53.1658 19.83L53.8798 14.916C53.9008 14.79 53.9848 14.727 54.1108 14.727H56.6728C56.8198 14.727 56.8828 14.811 56.8618 14.958L54.6778 25.311C54.6568 25.437 54.5728 25.5 54.4468 25.5H51.3178C51.1918 25.5 51.1078 25.437 51.0868 25.311L50.1208 20.082L49.8898 18.633C49.8688 18.444 49.6588 18.444 49.6378 18.633L49.4068 20.103L48.5458 25.311C48.5248 25.437 48.4408 25.5 48.3148 25.5H45.2068C45.0808 25.5 44.9968 25.437 44.9758 25.311L42.8128 14.958C42.7918 14.811 42.8548 14.727 43.0018 14.727H45.9628C46.0888 14.727 46.1728 14.79 46.1938 14.916L46.9288 19.83C47.0128 20.271 47.0758 20.754 47.1388 21.195C47.2018 21.51 47.4748 21.531 47.5378 21.195L47.7478 19.872L48.6088 14.916C48.6298 14.79 48.7138 14.727 48.8398 14.727H51.3808ZM61.1582 25.29C61.1582 25.416 61.0742 25.5 60.9482 25.5H58.0292C57.9032 25.5 57.8192 25.416 57.8192 25.29V14.937C57.8192 14.811 57.9032 14.727 58.0292 14.727H60.9482C61.0742 14.727 61.1582 14.811 61.1582 14.937V25.29ZM59.4572 13.74C58.3442 13.74 57.5882 12.942 57.5882 11.934C57.5882 10.926 58.3442 10.107 59.4572 10.107C60.5492 10.107 61.3052 10.926 61.3052 11.934C61.3052 12.942 60.5492 13.74 59.4572 13.74ZM62.8154 14.727C63.2144 14.727 63.3194 14.538 63.3614 14.055L63.5084 12.039C63.5084 11.913 63.6134 11.829 63.7394 11.829H66.2804C66.4064 11.829 66.4904 11.913 66.4904 12.039V14.517C66.4904 14.643 66.5744 14.727 66.7004 14.727H68.6744C68.8004 14.727 68.8844 14.811 68.8844 14.937V16.659C68.8844 16.785 68.8004 16.869 68.6744 16.869H66.4694V22.056C66.4694 22.875 66.9314 23.085 67.4564 23.085C67.8764 23.085 68.3384 22.938 68.7164 22.707C68.8634 22.623 68.9684 22.665 68.9684 22.833V24.828C68.9684 24.933 68.9264 25.017 68.8424 25.08C68.2334 25.458 67.3724 25.71 66.4274 25.71C64.6844 25.71 63.1304 24.912 63.1304 22.476V16.869H62.2484C62.1224 16.869 62.0384 16.785 62.0384 16.659V14.937C62.0384 14.811 62.1224 14.727 62.2484 14.727H62.8154ZM73.4298 16.323C73.4298 16.638 73.7868 16.68 73.9128 16.407C74.3748 15.315 75.1308 14.496 76.6008 14.496C78.2178 14.496 78.9528 15.609 78.9528 17.373V25.29C78.9528 25.416 78.8688 25.5 78.7428 25.5H75.8238C75.6978 25.5 75.6138 25.416 75.6138 25.29V18.633C75.6138 17.709 75.2778 17.268 74.5848 17.268C73.8708 17.268 73.4298 17.709 73.4298 18.633V25.29C73.4298 25.416 73.3458 25.5 73.2198 25.5H70.3008C70.1748 25.5 70.0908 25.416 70.0908 25.29V10.548C70.0908 10.422 70.1748 10.338 70.3008 10.338H73.2198C73.3458 10.338 73.4298 10.422 73.4298 10.548V16.323Z' fill='%231E1E1E'/%3E%3Cpath d='M100.132 16.3203C105.58 17.3761 107.272 22.4211 107.318 27.4961C107.318 27.6101 107.226 27.7041 107.112 27.7041H100.252C100.138 27.7041 100.046 27.6121 100.046 27.5001C100.026 23.5629 99.3877 20.0896 95.4865 19.9396C95.3705 19.9356 95.2725 20.0276 95.2725 20.1456V27.5001C95.2725 27.6141 95.1806 27.7061 95.0666 27.7061H88.206C88.092 27.7061 88 27.6141 88 27.5001V8.75585C88 8.64187 88.092 8.54989 88.206 8.54989H95.0686C95.1826 8.54989 95.2745 8.64187 95.2745 8.75585V15.7764C95.2745 15.8804 95.3585 15.9644 95.4625 15.9644C95.5445 15.9644 95.6185 15.9104 95.6425 15.8324C97.4081 10.0416 100.709 8.58588 106.07 8.55189C106.184 8.55189 106.276 8.64387 106.276 8.75785V15.7604C106.276 15.8744 106.184 15.9664 106.07 15.9664H100.166C100.066 15.9664 99.9856 16.0464 99.9856 16.1464C99.9856 16.2304 100.048 16.3043 100.132 16.3203ZM118.918 20.7095V16.1704C118.918 16.0564 119.01 15.9644 119.124 15.9644H124.173C124.273 15.9644 124.353 15.8844 124.353 15.7844C124.353 15.6985 124.291 15.6245 124.207 15.6085C120.256 14.8246 118.432 12.5511 118.37 8.75585C118.368 8.64387 118.458 8.54989 118.572 8.54989H125.986C126.1 8.54989 126.192 8.64187 126.192 8.75585V11.9532C126.192 12.0672 126.284 12.1592 126.398 12.1592H130.649C130.763 12.1592 130.855 12.2511 130.855 12.3651V15.7624C130.855 15.8764 130.763 15.9684 130.649 15.9684H126.398C126.284 15.9684 126.192 16.0604 126.192 16.1744V19.8356C126.192 21.1294 126.986 21.5553 128.04 21.5553C129.692 21.5553 131.323 20.8114 131.977 20.4735C132.113 20.4035 132.277 20.5015 132.277 20.6555V26.3543C132.277 26.5063 132.193 26.6463 132.059 26.7183C131.413 27.0582 129.418 28 127.136 28C122.435 27.996 118.918 26.0824 118.918 20.7095ZM109.266 27.4981V16.1704C109.266 16.0564 109.358 15.9644 109.472 15.9644H116.334C116.448 15.9644 116.54 16.0564 116.54 16.1704V27.4981C116.54 27.6121 116.448 27.7041 116.334 27.7041H109.472C109.358 27.7021 109.266 27.6101 109.266 27.4981ZM108.876 11.4913C108.876 13.4189 110.238 14.9826 112.853 14.9826C115.469 14.9826 116.83 13.4189 116.83 11.4913C116.83 9.56369 115.471 8 112.853 8C110.238 8 108.876 9.56369 108.876 11.4913Z' fill='%231E1E1E'/%3E%3C/svg%3E");}.formkit-form[data-uid="04b3f28036"] .formkit-powered-by-convertkit:hover,.formkit-form[data-uid="04b3f28036"] .formkit-powered-by-convertkit:focus{background-color:#ffffff;-webkit-transform:scale(1.025) perspective(1px);-ms-transform:scale(1.025) perspective(1px);transform:scale(1.025) perspective(1px);opacity:1;}.formkit-form[data-uid="04b3f28036"] .formkit-powered-by-convertkit[data-variant="dark"],.formkit-form[data-uid="04b3f28036"] .formkit-powered-by-convertkit[data-variant="light"]{background-color:transparent;border-color:transparent;width:133px;}.formkit-form[data-uid="04b3f28036"] .formkit-powered-by-convertkit[data-variant="light"]{color:#ffffff;background-image:url("data:image/svg+xml;charset=utf8,%3Csvg width='133' height='36' viewBox='0 0 133 36' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0.861 25.5C0.735 25.5 0.651 25.416 0.651 25.29V10.548C0.651 10.422 0.735 10.338 0.861 10.338H6.279C9.072 10.338 10.668 11.451 10.668 13.824C10.668 15.819 9.219 16.932 8.001 17.226C7.707 17.268 7.707 17.625 8.022 17.688C9.912 18.108 11.088 19.116 11.088 21.321C11.088 23.715 9.429 25.5 6.426 25.5H0.861ZM5.397 23.085C6.825 23.085 7.518 22.224 7.518 21.006C7.518 19.683 6.825 18.948 5.397 18.948H4.2V23.085H5.397ZM5.313 16.617C6.51 16.617 7.245 15.945 7.245 14.601C7.245 13.383 6.51 12.753 5.25 12.753H4.2V16.617H5.313ZM17.9758 23.883C17.9758 23.568 17.6608 23.505 17.5348 23.799C17.0308 24.954 16.1698 25.731 14.5528 25.731C12.8728 25.731 12.0958 24.471 12.0958 22.707V14.937C12.0958 14.811 12.1798 14.727 12.3058 14.727H15.2248C15.3508 14.727 15.4348 14.811 15.4348 14.937V21.657C15.4348 22.581 15.7708 23.022 16.4638 23.022C17.1778 23.022 17.6188 22.581 17.6188 21.657V14.937C17.6188 14.811 17.7028 14.727 17.8288 14.727H20.7478C20.8738 14.727 20.9578 14.811 20.9578 14.937V25.29C20.9578 25.416 20.8738 25.5 20.7478 25.5H18.1858C18.0598 25.5 17.9758 25.416 17.9758 25.29V23.883ZM25.6141 25.29C25.6141 25.416 25.5301 25.5 25.4041 25.5H22.4851C22.3591 25.5 22.2751 25.416 22.2751 25.29V14.937C22.2751 14.811 22.3591 14.727 22.4851 14.727H25.4041C25.5301 14.727 25.6141 14.811 25.6141 14.937V25.29ZM23.9131 13.74C22.8001 13.74 22.0441 12.942 22.0441 11.934C22.0441 10.926 22.8001 10.107 23.9131 10.107C25.0051 10.107 25.7611 10.926 25.7611 11.934C25.7611 12.942 25.0051 13.74 23.9131 13.74ZM26.7883 10.548C26.7883 10.422 26.8723 10.338 26.9983 10.338H29.9173C30.0433 10.338 30.1273 10.422 30.1273 10.548V22.056C30.1273 22.749 30.2533 23.085 30.8203 23.085C31.0093 23.085 31.1983 23.043 31.3663 23.001C31.5133 22.959 31.6183 22.959 31.6183 23.127V25.059C31.6183 25.164 31.5763 25.269 31.4923 25.311C30.9673 25.521 30.2953 25.71 29.5813 25.71C27.7123 25.71 26.7883 24.639 26.7883 22.476V10.548ZM32.4237 14.727C32.8227 14.727 32.9277 14.538 32.9697 14.055L33.1167 12.039C33.1167 11.913 33.2217 11.829 33.3477 11.829H35.8887C36.0147 11.829 36.0987 11.913 36.0987 12.039V14.517C36.0987 14.643 36.1827 14.727 36.3087 14.727H38.2827C38.4087 14.727 38.4927 14.811 38.4927 14.937V16.659C38.4927 16.785 38.4087 16.869 38.2827 16.869H36.0777V22.056C36.0777 22.875 36.5397 23.085 37.0647 23.085C37.4847 23.085 37.9467 22.938 38.3247 22.707C38.4717 22.623 38.5767 22.665 38.5767 22.833V24.828C38.5767 24.933 38.5347 25.017 38.4507 25.08C37.8417 25.458 36.9807 25.71 36.0357 25.71C34.2927 25.71 32.7387 24.912 32.7387 22.476V16.869H31.8567C31.7307 16.869 31.6467 16.785 31.6467 16.659V14.937C31.6467 14.811 31.7307 14.727 31.8567 14.727H32.4237ZM51.3808 14.727C51.5068 14.727 51.5908 14.79 51.6118 14.916L52.3888 19.851L52.5778 21.174C52.6198 21.468 52.9558 21.468 52.9768 21.174C53.0398 20.712 53.0818 20.271 53.1658 19.83L53.8798 14.916C53.9008 14.79 53.9848 14.727 54.1108 14.727H56.6728C56.8198 14.727 56.8828 14.811 56.8618 14.958L54.6778 25.311C54.6568 25.437 54.5728 25.5 54.4468 25.5H51.3178C51.1918 25.5 51.1078 25.437 51.0868 25.311L50.1208 20.082L49.8898 18.633C49.8688 18.444 49.6588 18.444 49.6378 18.633L49.4068 20.103L48.5458 25.311C48.5248 25.437 48.4408 25.5 48.3148 25.5H45.2068C45.0808 25.5 44.9968 25.437 44.9758 25.311L42.8128 14.958C42.7918 14.811 42.8548 14.727 43.0018 14.727H45.9628C46.0888 14.727 46.1728 14.79 46.1938 14.916L46.9288 19.83C47.0128 20.271 47.0758 20.754 47.1388 21.195C47.2018 21.51 47.4748 21.531 47.5378 21.195L47.7478 19.872L48.6088 14.916C48.6298 14.79 48.7138 14.727 48.8398 14.727H51.3808ZM61.1582 25.29C61.1582 25.416 61.0742 25.5 60.9482 25.5H58.0292C57.9032 25.5 57.8192 25.416 57.8192 25.29V14.937C57.8192 14.811 57.9032 14.727 58.0292 14.727H60.9482C61.0742 14.727 61.1582 14.811 61.1582 14.937V25.29ZM59.4572 13.74C58.3442 13.74 57.5882 12.942 57.5882 11.934C57.5882 10.926 58.3442 10.107 59.4572 10.107C60.5492 10.107 61.3052 10.926 61.3052 11.934C61.3052 12.942 60.5492 13.74 59.4572 13.74ZM62.8154 14.727C63.2144 14.727 63.3194 14.538 63.3614 14.055L63.5084 12.039C63.5084 11.913 63.6134 11.829 63.7394 11.829H66.2804C66.4064 11.829 66.4904 11.913 66.4904 12.039V14.517C66.4904 14.643 66.5744 14.727 66.7004 14.727H68.6744C68.8004 14.727 68.8844 14.811 68.8844 14.937V16.659C68.8844 16.785 68.8004 16.869 68.6744 16.869H66.4694V22.056C66.4694 22.875 66.9314 23.085 67.4564 23.085C67.8764 23.085 68.3384 22.938 68.7164 22.707C68.8634 22.623 68.9684 22.665 68.9684 22.833V24.828C68.9684 24.933 68.9264 25.017 68.8424 25.08C68.2334 25.458 67.3724 25.71 66.4274 25.71C64.6844 25.71 63.1304 24.912 63.1304 22.476V16.869H62.2484C62.1224 16.869 62.0384 16.785 62.0384 16.659V14.937C62.0384 14.811 62.1224 14.727 62.2484 14.727H62.8154ZM73.4298 16.323C73.4298 16.638 73.7868 16.68 73.9128 16.407C74.3748 15.315 75.1308 14.496 76.6008 14.496C78.2178 14.496 78.9528 15.609 78.9528 17.373V25.29C78.9528 25.416 78.8688 25.5 78.7428 25.5H75.8238C75.6978 25.5 75.6138 25.416 75.6138 25.29V18.633C75.6138 17.709 75.2778 17.268 74.5848 17.268C73.8708 17.268 73.4298 17.709 73.4298 18.633V25.29C73.4298 25.416 73.3458 25.5 73.2198 25.5H70.3008C70.1748 25.5 70.0908 25.416 70.0908 25.29V10.548C70.0908 10.422 70.1748 10.338 70.3008 10.338H73.2198C73.3458 10.338 73.4298 10.422 73.4298 10.548V16.323Z' fill='white'/%3E%3Cpath d='M100.132 16.3203C105.58 17.3761 107.272 22.4211 107.318 27.4961C107.318 27.6101 107.226 27.7041 107.112 27.7041H100.252C100.138 27.7041 100.046 27.6121 100.046 27.5001C100.026 23.5629 99.3877 20.0896 95.4865 19.9396C95.3705 19.9356 95.2725 20.0276 95.2725 20.1456V27.5001C95.2725 27.6141 95.1806 27.7061 95.0666 27.7061H88.206C88.092 27.7061 88 27.6141 88 27.5001V8.75585C88 8.64187 88.092 8.54989 88.206 8.54989H95.0686C95.1826 8.54989 95.2745 8.64187 95.2745 8.75585V15.7764C95.2745 15.8804 95.3585 15.9644 95.4625 15.9644C95.5445 15.9644 95.6185 15.9104 95.6425 15.8324C97.4081 10.0416 100.709 8.58588 106.07 8.55189C106.184 8.55189 106.276 8.64387 106.276 8.75785V15.7604C106.276 15.8744 106.184 15.9664 106.07 15.9664H100.166C100.066 15.9664 99.9856 16.0464 99.9856 16.1464C99.9856 16.2304 100.048 16.3043 100.132 16.3203ZM118.918 20.7095V16.1704C118.918 16.0564 119.01 15.9644 119.124 15.9644H124.173C124.273 15.9644 124.353 15.8844 124.353 15.7844C124.353 15.6985 124.291 15.6245 124.207 15.6085C120.256 14.8246 118.432 12.5511 118.37 8.75585C118.368 8.64387 118.458 8.54989 118.572 8.54989H125.986C126.1 8.54989 126.192 8.64187 126.192 8.75585V11.9532C126.192 12.0672 126.284 12.1592 126.398 12.1592H130.649C130.763 12.1592 130.855 12.2511 130.855 12.3651V15.7624C130.855 15.8764 130.763 15.9684 130.649 15.9684H126.398C126.284 15.9684 126.192 16.0604 126.192 16.1744V19.8356C126.192 21.1294 126.986 21.5553 128.04 21.5553C129.692 21.5553 131.323 20.8114 131.977 20.4735C132.113 20.4035 132.277 20.5015 132.277 20.6555V26.3543C132.277 26.5063 132.193 26.6463 132.059 26.7183C131.413 27.0582 129.418 28 127.136 28C122.435 27.996 118.918 26.0824 118.918 20.7095ZM109.266 27.4981V16.1704C109.266 16.0564 109.358 15.9644 109.472 15.9644H116.334C116.448 15.9644 116.54 16.0564 116.54 16.1704V27.4981C116.54 27.6121 116.448 27.7041 116.334 27.7041H109.472C109.358 27.7021 109.266 27.6101 109.266 27.4981ZM108.876 11.4913C108.876 13.4189 110.238 14.9826 112.853 14.9826C115.469 14.9826 116.83 13.4189 116.83 11.4913C116.83 9.56369 115.471 8 112.853 8C110.238 8 108.876 9.56369 108.876 11.4913Z' fill='white'/%3E%3C/svg%3E");}@-webkit-keyframes formkit-bouncedelay-formkit-form-data-uid-04b3f28036-{0%,80%,100%{-webkit-transform:scale(0);-ms-transform:scale(0);transform:scale(0);}40%{-webkit-transform:scale(1);-ms-transform:scale(1);transform:scale(1);}}@keyframes formkit-bouncedelay-formkit-form-data-uid-04b3f28036-{0%,80%,100%{-webkit-transform:scale(0);-ms-transform:scale(0);transform:scale(0);}40%{-webkit-transform:scale(1);-ms-transform:scale(1);transform:scale(1);}}.formkit-form[data-uid="04b3f28036"] blockquote{padding:10px 20px;margin:0 0 20px;border-left:5px solid #e1e1e1;}.formkit-form[data-uid="04b3f28036"] .seva-custom-content{padding:15px;font-size:16px;color:#fff;mix-blend-mode:difference;}.formkit-form[data-uid="04b3f28036"] .formkit-modal.guard{max-width:420px;width:100%;} .formkit-form[data-uid="04b3f28036"]{box-shadow:0 2px 15px 0 rgba(210,214,220,0.5);max-width:700px;overflow:hidden;}.formkit-form[data-uid="04b3f28036"] [data-style="full"]{width:100%;display:block;}.formkit-form[data-uid="04b3f28036"] .formkit-header{margin-top:0;margin-bottom:20px;}.formkit-form[data-uid="04b3f28036"] .formkit-subheader{margin:15px 0;}.formkit-form[data-uid="04b3f28036"] .formkit-column{padding:20px;position:relative;}.formkit-form[data-uid="04b3f28036"] .formkit-column:nth-child(2){border-top:1px solid #e9ecef;}.formkit-form[data-uid="04b3f28036"] .formkit-background{width:100%;height:100%;position:absolute;top:0;left:0;background-size:cover;background-position:center;opacity:0.5;z-index:1;}.formkit-form[data-uid="04b3f28036"] .formkit-header,.formkit-form[data-uid="04b3f28036"] .formkit-subheader,.formkit-form[data-uid="04b3f28036"] .formkit-image{z-index:2;position:relative;}.formkit-form[data-uid="04b3f28036"] .formkit-field{margin:0 0 15px 0;}.formkit-form[data-uid="04b3f28036"] .formkit-input,.formkit-form[data-uid="04b3f28036"] .formkit-submit{width:100%;}.formkit-form[data-uid="04b3f28036"] .formkit-guarantee{font-size:13px;margin:0 0 15px 0;}.formkit-form[data-uid="04b3f28036"] .formkit-guarantee > p{margin:0;}.formkit-form[data-uid="04b3f28036"] .formkit-powered-by-convertkit-container{margin-bottom:0;}.formkit-form[data-uid="04b3f28036"][min-width~="600"] [data-style="full"],.formkit-form[data-uid="04b3f28036"][min-width~="700"] [data-style="full"],.formkit-form[data-uid="04b3f28036"][min-width~="800"] [data-style="full"]{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));}.formkit-form[data-uid="04b3f28036"][min-width~="600"] .formkit-submit,.formkit-form[data-uid="04b3f28036"][min-width~="700"] .formkit-submit,.formkit-form[data-uid="04b3f28036"][min-width~="800"] .formkit-submit{width:100%;}.formkit-form[data-uid="04b3f28036"][min-width~="600"] .formkit-column,.formkit-form[data-uid="04b3f28036"][min-width~="700"] .formkit-column,.formkit-form[data-uid="04b3f28036"][min-width~="800"] .formkit-column{padding:40px;}.formkit-form[data-uid="04b3f28036"][min-width~="600"] .formkit-column:nth-child(2),.formkit-form[data-uid="04b3f28036"][min-width~="700"] .formkit-column:nth-child(2),.formkit-form[data-uid="04b3f28036"][min-width~="800"] .formkit-column:nth-child(2){border-top:none;} </style></form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CONTACTO -->
+    <section id="contacto">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-label">Hablemos</div>
+                <h2 class="section-title">Contacto</h2>
+                <p class="section-subtitle">
+                    ¿Lista para dar el primer paso? Estoy aquí para acompañarte
+                </p>
+            </div>
+            
+            <div class="contacto-container">
+                <div class="contacto-info">
+                    <h3>Ponte en contacto</h3>
+                    <p>
+                        Si tienes dudas sobre mis servicios, quieres saber si mi método es para ti, o simplemente necesitas hablar con alguien que te entienda... escríbeme.
+                    </p>
+                    
+                    <ul class="contacto-methods">
+                        <li>
+                            <strong>📧 Email</strong>
+                            svallenut@gmail.com
+                        </li>
+                        <li>
+                            <strong>📱 WhatsApp</strong>
+                            +34 699013886
+                        </li>
+                        <li>
+                            <strong>📍 Ubicación</strong>
+                            Madrid, España<br>
+                            <em>Consultas online disponibles en toda España y Latinoamérica</em>
+                        </li>
+                        <li>
+                            <strong>⏰ Horario</strong>
+                            Lunes a Viernes: 9:00 - 18:00
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="contacto-form">
+                    <form id="contactForm" onsubmit="handleContactSubmit(event)">
+                        <div class="form-group">
+                            <label for="contact-nombre">Nombre *</label>
+                            <input type="text" id="contact-nombre" name="nombre" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact-email">Email *</label>
+                            <input type="email" id="contact-email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact-asunto">Asunto *</label>
+                            <input type="text" id="contact-asunto" name="asunto" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact-mensaje">Mensaje *</label>
+                            <textarea id="contact-mensaje" name="mensaje" rows="6" required placeholder="Cuéntame qué necesitas..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary" style="width: 100%;">
+                            Enviar Mensaje
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <div class="logo-apple">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M 50 8 Q 56 12 54 20" fill="none" stroke="#6B8E7F" stroke-width="3" stroke-linecap="round"/>
+                            <ellipse cx="54" cy="16" rx="5" ry="8" fill="#6B8E7F" transform="rotate(-25 54 16)"/>
+                            <path d="M 50 22 C 33 23 22 35 22 52 C 22 68 28 80 40 88 C 45 91 50 93 50 93 C 50 93 55 91 60 88 C 72 80 78 68 78 52 C 78 35 67 22 50 22 Z" fill="#9B6B4C"/>
+                            <circle cx="72" cy="48" r="12" fill="#F7F3EE"/>
+                        </svg>
+                    </div>
+                    <div class="logo-text">
+                        <div class="logo-name">Sara Valle</div>
+                        <div class="logo-tagline">Cómete la **** manzana</div>
+                    </div>
+                </div>
+                <p>
+                    Ayudando a mujeres con exceso de carga mental a recuperar su energía, digestión y relación con su cuerpo. Porque tú también mereces estar en tu lista de prioridades.
+                </p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Navegación</h4>
+                <ul class="footer-links">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#mi-historia">Mi Historia</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#recurso">Recurso Gratis</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Sígueme</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                    <li><a href="#">YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 Sara Valle - Nutrición. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Mobile menu toggle
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        mobileToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 90;
+                    const targetPosition = target.offsetTop - offset;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Form submissions
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData);
+            
+            console.log('Lead Form Data:', data);
+            
+            alert('¡Gracias! Tu guía está en camino a tu email 🍎\n\nRevisa tu bandeja de entrada (y spam por si acaso).');
+            
+            e.target.reset();
+        }
+        
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData);
+            
+            console.log('Contact Form Data:', data);
+            
+            alert('¡Mensaje enviado! 💚\n\nTe responderé en menos de 24 horas.');
+            
+            e.target.reset();
+        }
+        
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.servicio-card, .blog-card, .historia-content').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
