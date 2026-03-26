@@ -1312,18 +1312,7 @@
             alert('¡Gracias! Tu guía está en camino a tu email 🍎\n\nRevisa tu bandeja de entrada (y spam por si acaso).');
             
             e.target.reset();
-        }
         
-        function handleContactSubmit(e) {
-            e.preventDefault();
-            const formData = new FormData(e.target);
-            const data = Object.fromEntries(formData);
-            
-            console.log('Contact Form Data:', data);
-            
-            alert('¡Mensaje enviado! 💚\n\nTe responderé en menos de 48 horas.');
-            
-            e.target.reset();
         }
         
         // Intersection Observer for animations
