@@ -1146,8 +1146,39 @@
                     </ul>
                 </div>
                 
-                <div class="contacto-form">
-                    <form id="contactForm" onsubmit="handleContactSubmit(event)">
+               <form action="https://formsubmit.co/info@saravallenutri.com" method="POST">
+    
+    <!-- Configuración de FormSubmit (opcional pero recomendado) -->
+    <input type="hidden" name="_subject" value="Nuevo contacto desde la web">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
+    <input type="text" name="_honey" style="display:none">
+    
+    <!-- Campos del formulario -->
+    <div class="form-group">
+        <label for="contact-nombre">Nombre *</label>
+        <input type="text" id="contact-nombre" name="nombre" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="contact-email">Email *</label>
+        <input type="email" id="contact-email" name="email" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="contact-asunto">Asunto *</label>
+        <input type="text" id="contact-asunto" name="asunto" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="contact-mensaje">Mensaje *</label>
+        <textarea id="contact-mensaje" name="mensaje" rows="6" required placeholder="Cuéntame qué necesitas..."></textarea>
+    </div>
+    
+    <button type="submit" class="btn-primary" style="width: 100%;">
+        Enviar Mensaje
+    </button>
+</form>
                         <div class="form-group">
                             <label for="contact-nombre">Nombre *</label>
                             <input type="text" id="contact-nombre" name="nombre" required>
@@ -1290,7 +1321,7 @@
             
             console.log('Contact Form Data:', data);
             
-            alert('¡Mensaje enviado! 💚\n\nTe responderé en menos de 24 horas.');
+            alert('¡Mensaje enviado! 💚\n\nTe responderé en menos de 48 horas.');
             
             e.target.reset();
         }
